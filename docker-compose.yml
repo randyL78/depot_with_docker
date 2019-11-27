@@ -1,0 +1,35 @@
+version: "3"
+
+services:
+  depot:
+    build: .
+    ports:
+      - "3030:3000"
+    volumes:
+      - .:/usr/src/app
+      - gem_cache:/gems
+    env_file:
+      - .env/development/database
+      - .env/development/web
+
+  mysql:
+    image: mysql:5.7
+    restart: always
+    ports:
+      - "3322:3306"
+    env_file:
+      - .env/development/database
+    volumes:
+      - sql_db:/var/lib/mysql
+
+  postgres:
+    image: postgres
+    env_file:
+      - .env/development/database
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
+  gem_cache:
+  sql_db:

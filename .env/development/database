@@ -1,0 +1,6 @@
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=some_long_secure_password
+POSTGRES_DB=depot_development
+
+MYSQL_ROOT_PASSWORD=example
+MYSQL_DATABASE=depot
