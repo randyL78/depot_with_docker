@@ -1,20 +1,9 @@
-# default: &default
-#   adapter: postgresql
-#   encoding: unicode
-#   host: <%= ENV.fetch('DATABASE_HOST') %>
-#   username: <%= ENV.fetch('POSTGRES_USER') %>
-#   password: <%= ENV.fetch('POSTGRES_PASSWORD') %>
-#   database: <%= ENV.fetch('POSTGRES_DB') %>
-#   pool: 5
-#   variables:
-#     statement_timeout: 5000
-
 default: &default
   adapter: mysql2
   encoding: utf8
-  host: <%= ENV.fetch('DATABASE_HOST') %>
+  host: <%= ENV.fetch('DATABASE_HOST_DEV') %>
   password: <%= ENV.fetch('MYSQL_ROOT_PASSWORD') %>
-  database: <%= ENV.fetch('MYSQL_DATABASE') %>
+  database: depot_development
   pool: 5
 
 development:
@@ -25,7 +14,10 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
+  host: <%= ENV.fetch('DATABASE_HOST_TEST') %>
   database: depot_test
 
 production:
   <<: *default
+  host: <%= ENV.fetch('DATABASE_HOST_PROD') %>
+  database: depot_production
